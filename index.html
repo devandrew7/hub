@@ -7,17 +7,15 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Animated Glowing Background Blobs -->
+    <!-- Steep Radial Glow behind Hero Title -->
     <div class="background-glow">
-        <div class="blob blob-green"></div>
-        <div class="blob blob-purple"></div>
-        <div class="blob blob-blue"></div>
+        <div class="hero-glow"></div>
     </div>
 
     <div class="container">
@@ -25,7 +23,6 @@
         <header class="profile-header">
             <div class="profile-avatar-container">
                 <img id="profile-avatar" src="https://avatars.githubusercontent.com/u/67232569?v=4" alt="devandrew7 Avatar">
-                <div class="avatar-glow"></div>
             </div>
             <h1 class="profile-name">devandrew7</h1>
             <p class="profile-username">@devandrew7</p>
@@ -184,64 +181,66 @@
                 const card = document.createElement("div");
                 card.className = "repo-card";
                 card.setAttribute("data-category", repo.category);
-                card.style.setProperty("--accent-color", repo.color);
+                
+                // Add category color tints based on Steep style guide
+                if (repo.category === 'productivity') {
+                    card.classList.add('card-apricot');
+                } else if (repo.category === 'utilities') {
+                    card.classList.add('card-sky');
+                } else {
+                    card.classList.add('card-white');
+                }
 
-                // Determine button label and icon based on repo type
+                // Determine button label based on repo type
                 let actionBtnHtml = '';
                 if (repo.type === 'web') {
                     actionBtnHtml = `
                         <a href="${repo.actionUrl}" target="_blank" class="btn-action btn-demo btn-connect">
-                            <span class="btn-icon">🔗</span> 연결 (Connect)
+                            연결 (Connect)
                         </a>`;
                 } else if (repo.type === 'game') {
                     actionBtnHtml = `
                         <a href="${repo.actionUrl}" target="_blank" class="btn-action btn-demo btn-play">
-                            <span class="btn-icon">🎮</span> Play
+                            Play
                         </a>`;
                 } else if (repo.type === 'app') {
                     actionBtnHtml = `
                         <a href="${repo.actionUrl}" target="_blank" class="btn-action btn-demo btn-download">
-                            <span class="btn-icon">📥</span> 다운로드 (Download)
+                            다운로드 (Download)
                         </a>`;
                 }
 
                 // Create card structure
                 card.innerHTML = `
-                    <div class="card-glow"></div>
                     <div class="repo-card-header">
-                        <span class="repo-icon" style="background-color: ${repo.color}15; color: ${repo.color};">${repo.icon}</span>
-                        <span class="repo-lang" style="background-color: ${repo.color}12; color: ${repo.color}; border: 1px solid ${repo.color}25">${repo.language}</span>
+                        <span class="repo-icon">${repo.icon}</span>
+                        <span class="repo-lang">${repo.language}</span>
                     </div>
                     <h3 class="repo-title">${repo.label}</h3>
                     <p class="repo-desc">${repo.description}</p>
                     <div class="repo-stats">
                         <span class="stat-item" title="Stars">
-                            <svg class="icon-svg-small" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 .587l3.668 7.431 8.2 1.191-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.209l8.2-1.191L12 .587z"/>
+                            <svg class="icon-svg-small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                             </svg>
                             <span class="star-count">${repo.stars}</span>
                         </span>
                         <span class="stat-item" title="Forks">
-                            <svg class="icon-svg-small" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18 13.18V8.5c0-.83-.67-1.5-1.5-1.5H12V5.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5V7H4.5C3.67 7 3 7.67 3 8.5v4.68c-.88.39-1.5 1.28-1.5 2.32 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5c0-1.04-.62-1.93-1.5-2.32V9.5h3v3.68c-.88.39-1.5 1.28-1.5 2.32 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5c0-1.04-.62-1.93-1.5-2.32V5.5h3v7.68c-.88.39-1.5 1.28-1.5 2.32 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5c0-1.04-.62-1.93-1.5-2.32z"/>
+                            <svg class="icon-svg-small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="18" cy="18" r="3"></circle>
+                                <circle cx="6" cy="6" r="3"></circle>
+                                <circle cx="6" cy="18" r="3"></circle>
+                                <path d="M18 15V9a4 4 0 0 0-4-4H9"></path>
+                                <line x1="6" y1="9" x2="6" y2="15"></line>
                             </svg>
                             <span class="fork-count">${repo.forks}</span>
                         </span>
                     </div>
                     <div class="repo-actions">
-                        <a href="${repo.githubUrl}" target="_blank" class="btn-action btn-git">Source Code</a>
                         ${actionBtnHtml}
+                        <a href="${repo.githubUrl}" target="_blank" class="btn-action btn-git">Source Code</a>
                     </div>
                 `;
-                
-                // Track dynamic mouse glow coordinates
-                card.addEventListener("mousemove", (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty("--mouse-x", `${x}px`);
-                    card.style.setProperty("--mouse-y", `${y}px`);
-                });
 
                 grid.appendChild(card);
             });
