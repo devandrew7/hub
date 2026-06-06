@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>devandrew7 | GitHub Space</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Animated Glowing Background Blobs -->
+    <div class="background-glow">
+        <div class="blob blob-green"></div>
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-blue"></div>
+    </div>
+
+    <div class="container">
+        <!-- Profile Header Section -->
+        <header class="profile-header">
+            <div class="profile-avatar-container">
+                <img id="profile-avatar" src="https://avatars.githubusercontent.com/u/67232569?v=4" alt="devandrew7 Avatar">
+                <div class="avatar-glow"></div>
+            </div>
+            <h1 class="profile-name">devandrew7</h1>
+            <p class="profile-username">@devandrew7</p>
+            <p class="profile-bio" id="profile-bio">Curating productivity tools, Python utilities, and interactive web games.</p>
+            
+            <div class="profile-links">
+                <a href="https://github.com/devandrew7" target="_blank" class="btn-profile">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                    GitHub 프로필
+                </a>
+            </div>
+
+            <!-- Dynamic GitHub Stats Banner -->
+            <div class="stats-banner">
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-repos">6</span>
+                    <span class="stat-label">Repositories</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-stars">0</span>
+                    <span class="stat-label">Total Stars</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-followers">--</span>
+                    <span class="stat-label">Followers</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Category Filters -->
+        <section class="filters-section">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-category="all">전체 (All)</button>
+                <button class="filter-btn" data-category="productivity">생산성 & 자동화 (Productivity)</button>
+                <button class="filter-btn" data-category="utilities">이미지 유틸리티 (Utilities)</button>
+                <button class="filter-btn" data-category="games">교육용 게임 (Games)</button>
+            </div>
+        </section>
+
+        <!-- Repository Grid -->
+        <main class="repos-grid" id="repos-grid">
+            <!-- Cards will be populated dynamically or fallback -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="profile-footer">
+            <p>© 2026 devandrew7. Developed with Passion.</p>
+            <p class="footer-sub">Interactive portfolio page styled with Glassmorphic effects.</p>
+        </footer>
+    </div>
+
+    <!-- Core App JS -->
+    <script>
+        // Fallback Repository Data mapping
+        const FALLBACK_REPOS = [
+            {
+                name: "ExcelRibbonCreator",
+                label: "Excel Custom Ribbon Creator",
+                category: "productivity",
+                icon: "📑",
+                color: "#10b981", // green
+                description: "사용자 정의 엑셀 리본 메뉴를 시각적(WYSIWYG)으로 디자인하고 XML/VBA 파일 패키징을 지원하는 웹 저작 도구",
+                language: "JavaScript",
+                stars: 0,
+                forks: 0,
+                githubUrl: "https://github.com/devandrew7/ExcelRibbonCreator",
+                type: "web",
+                actionUrl: "https://devandrew7.github.io/ExcelRibbonCreator/" // Connect Link
+            },
+            {
+                name: "PhotoComparison",
+                label: "Photo Comparison Tool",
+                category: "utilities",
+                icon: "🖼️",
+                color: "#8b5cf6", // purple
+                description: "두 개의 폴더 하위 경로의 이미지 파일들을 분석하여 중복되거나 유사한 이미지를 스캔하고 검출하는 데스크톱용 파이썬 GUI 도구",
+                language: "Python",
+                stars: 0,
+                forks: 0,
+                githubUrl: "https://github.com/devandrew7/PhotoComparison",
+                type: "app",
+                actionUrl: "https://github.com/devandrew7/PhotoComparison/releases/latest/download/SmartPhotoComparator.exe" // Direct Download Link
+            },
+            {
+                name: "ImageDuplicateFinder",
+                label: "Image Duplicate Finder",
+                category: "utilities",
+                icon: "🔍",
+                color: "#3b82f6", // blue
+                description: "이미지 고유 해시(Image Hash) 대조 검사를 통해 정확한 중복 이미지를 검출하고 편리하게 정리하는 데스크톱 전용 정리 도구",
+                language: "Python",
+                stars: 0,
+                forks: 0,
+                githubUrl: "https://github.com/devandrew7/ImageDuplicateFinder",
+                type: "app",
+                actionUrl: "https://github.com/devandrew7/ImageDuplicateFinder/releases/latest/download/ImageDuplicateFinder.exe" // Direct Download Link
+            },
+            {
+                name: "PhotoViewer",
+                label: "Photo Viewer",
+                category: "utilities",
+                icon: "👁️",
+                color: "#06b6d4", // cyan
+                description: "대량의 이미지 파일들을 신속하게 슬라이드 및 단축키 조작으로 조회하고 분류할 수 있는 가벼운 포토 뷰어 데스크톱 뷰어",
+                language: "Python",
+                stars: 0,
+                forks: 0,
+                githubUrl: "https://github.com/devandrew7/PhotoViewer",
+                type: "app",
+                actionUrl: "https://github.com/devandrew7/PhotoViewer/releases/latest/download/main.exe" // Direct Download Link
+            },
+            {
+                name: "NumberBaseball",
+                label: "Number Baseball Game",
+                category: "games",
+                icon: "⚾",
+                color: "#f97316", // orange
+                description: "컴퓨터가 숨긴 3자리 숫자를 힌트(스트라이크, 볼)를 보고 유추하는 클래식 숫자 야구 퍼즐 게임",
+                language: "HTML",
+                stars: 0,
+                forks: 0,
+                githubUrl: "https://github.com/devandrew7/NumberBaseball",
+                type: "game",
+                actionUrl: "https://devandrew7.github.io/NumberBaseball/" // Play Link
+            },
+            {
+                name: "NumgameB",
+                label: "Kids Number Game",
+                category: "games",
+                icon: "🧮",
+                color: "#ec4899", // pink
+                description: "어린이들을 위해 기획된, 재미있는 인터랙티브 방식의 기초 사칙연산 숫자 계산 교육용 게임",
+                language: "HTML",
+                stars: 0,
+                forks: 0,
+                githubUrl: "https://github.com/devandrew7/NumgameB",
+                type: "game",
+                actionUrl: "https://devandrew7.github.io/NumgameB/" // Play Link
+            }
+        ];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initializeGrid(FALLBACK_REPOS);
+            fetchGitHubStats();
+            setupInteractiveFeatures();
+        });
+
+        // 1. Initial Render with Fallbacks
+        function initializeGrid(repos) {
+            const grid = document.getElementById("repos-grid");
+            grid.innerHTML = "";
+
+            repos.forEach(repo => {
+                const card = document.createElement("div");
+                card.className = "repo-card";
+                card.setAttribute("data-category", repo.category);
+                card.style.setProperty("--accent-color", repo.color);
+
+                // Determine button label and icon based on repo type
+                let actionBtnHtml = '';
+                if (repo.type === 'web') {
+                    actionBtnHtml = `
+                        <a href="${repo.actionUrl}" target="_blank" class="btn-action btn-demo btn-connect">
+                            <span class="btn-icon">🔗</span> 연결 (Connect)
+                        </a>`;
+                } else if (repo.type === 'game') {
+                    actionBtnHtml = `
+                        <a href="${repo.actionUrl}" target="_blank" class="btn-action btn-demo btn-play">
+                            <span class="btn-icon">🎮</span> Play
+                        </a>`;
+                } else if (repo.type === 'app') {
+                    actionBtnHtml = `
+                        <a href="${repo.actionUrl}" target="_blank" class="btn-action btn-demo btn-download">
+                            <span class="btn-icon">📥</span> 다운로드 (Download)
+                        </a>`;
+                }
+
+                // Create card structure
+                card.innerHTML = `
+                    <div class="card-glow"></div>
+                    <div class="repo-card-header">
+                        <span class="repo-icon" style="background-color: ${repo.color}15; color: ${repo.color};">${repo.icon}</span>
+                        <span class="repo-lang" style="background-color: ${repo.color}12; color: ${repo.color}; border: 1px solid ${repo.color}25">${repo.language}</span>
+                    </div>
+                    <h3 class="repo-title">${repo.label}</h3>
+                    <p class="repo-desc">${repo.description}</p>
+                    <div class="repo-stats">
+                        <span class="stat-item" title="Stars">
+                            <svg class="icon-svg-small" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 .587l3.668 7.431 8.2 1.191-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.209l8.2-1.191L12 .587z"/>
+                            </svg>
+                            <span class="star-count">${repo.stars}</span>
+                        </span>
+                        <span class="stat-item" title="Forks">
+                            <svg class="icon-svg-small" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 13.18V8.5c0-.83-.67-1.5-1.5-1.5H12V5.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5V7H4.5C3.67 7 3 7.67 3 8.5v4.68c-.88.39-1.5 1.28-1.5 2.32 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5c0-1.04-.62-1.93-1.5-2.32V9.5h3v3.68c-.88.39-1.5 1.28-1.5 2.32 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5c0-1.04-.62-1.93-1.5-2.32V5.5h3v7.68c-.88.39-1.5 1.28-1.5 2.32 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5c0-1.04-.62-1.93-1.5-2.32z"/>
+                            </svg>
+                            <span class="fork-count">${repo.forks}</span>
+                        </span>
+                    </div>
+                    <div class="repo-actions">
+                        <a href="${repo.githubUrl}" target="_blank" class="btn-action btn-git">Source Code</a>
+                        ${actionBtnHtml}
+                    </div>
+                `;
+                
+                // Track dynamic mouse glow coordinates
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty("--mouse-x", `${x}px`);
+                    card.style.setProperty("--mouse-y", `${y}px`);
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        // 2. Fetch Live GitHub API data to enrich stats and descriptions
+        async function fetchGitHubStats() {
+            try {
+                // Fetch Profile Stats
+                const userRes = await fetch("https://api.github.com/users/devandrew7");
+                if (userRes.ok) {
+                    const userData = await userRes.json();
+                    document.getElementById("profile-avatar").src = userData.avatar_url;
+                    document.getElementById("profile-bio").textContent = userData.bio || userData.description || document.getElementById("profile-bio").textContent;
+                    document.getElementById("stat-followers").textContent = userData.followers;
+                    document.getElementById("stat-repos").textContent = userData.public_repos;
+                }
+
+                // Fetch Repos Detail
+                const reposRes = await fetch("https://api.github.com/users/devandrew7/repos");
+                if (reposRes.ok) {
+                    const reposData = await reposRes.json();
+                    let totalStars = 0;
+
+                    // Match dynamic API data to our fallback list
+                    const updatedRepos = FALLBACK_REPOS.map(fallback => {
+                        const apiMatch = reposData.find(apiRepo => apiRepo.name === fallback.name);
+                        if (apiMatch) {
+                            totalStars += apiMatch.stargazers_count;
+                            return {
+                                ...fallback,
+                                description: apiMatch.description || fallback.description,
+                                stars: apiMatch.stargazers_count,
+                                forks: apiMatch.forks_count
+                            };
+                        }
+                        return fallback;
+                    });
+
+                    // Re-render grid with live data
+                    initializeGrid(updatedRepos);
+                    document.getElementById("stat-stars").textContent = totalStars;
+                }
+            } catch (err) {
+                console.warn("GitHub API 로드 실패 - 로컬 하드코딩 대체 데이터가 유지됩니다.", err);
+            }
+        }
+
+        // 3. Interactive Filter Tabs & Hover Cursor glow bindings
+        function setupInteractiveFeatures() {
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            
+            filterButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    filterButtons.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+
+                    const category = btn.getAttribute("data-category");
+                    const cards = document.querySelectorAll(".repo-card");
+
+                    cards.forEach(card => {
+                        const cardCategory = card.getAttribute("data-category");
+                        if (category === "all" || cardCategory === category) {
+                            card.style.display = "flex";
+                            card.style.animation = "fadeInUp 0.4s ease forwards";
+                        } else {
+                            card.style.display = "none";
+                        }
+                    });
+                });
+            });
+        }
+    </script>
+</body>
+</html>
